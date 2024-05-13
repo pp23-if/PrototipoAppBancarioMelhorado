@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import prototipoappbancariomelhorado.main.R
@@ -18,6 +19,7 @@ import java.time.format.DateTimeFormatter
 class ControladoraAberturaConta : AppCompatActivity() {
 
     lateinit var botaoAbrirConta : Button;
+    lateinit var botaoVoltar : TextView;
     lateinit var botaoRegistros : Button;
     lateinit var campoNome : EditText;
     lateinit var campoDataNascimento : EditText;
@@ -34,6 +36,13 @@ class ControladoraAberturaConta : AppCompatActivity() {
         var usuarioDAO = UsuarioDAO(this)
 
         var contaDAO = ContaDAO(this)
+
+
+        botaoVoltar.setOnClickListener()
+        {
+            this.finish()
+        }
+
 
         botaoRegistros.setOnClickListener()
         {
@@ -103,6 +112,7 @@ class ControladoraAberturaConta : AppCompatActivity() {
         campoDataNascimento = findViewById(R.id.editDataNascimento)
         campoLogin = findViewById(R.id.editUsuario)
         campoSenha = findViewById(R.id.editSenha)
+        botaoVoltar = findViewById(R.id.botaoVoltar)
         botaoAbrirConta = findViewById(R.id.botaoDeAbrirConta)
         botaoRegistros = findViewById(R.id.botaoDeRegisto)
 

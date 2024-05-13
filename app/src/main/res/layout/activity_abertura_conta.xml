@@ -161,5 +161,15 @@
         app:layout_constraintTop_toTopOf="@id/botaoDeAbrirConta"
         app:layout_constraintVertical_bias="0.838" />
 
+    <TextView
+        android:id="@+id/botaoVoltar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/baseline_arrow_back_24"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="20dp"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
