@@ -1,5 +1,6 @@
 package prototipoappbancariomelhorado.main.controller
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -37,6 +38,11 @@ class ControladoraAberturaConta : AppCompatActivity() {
         botaoRegistros.setOnClickListener()
         {
 
+            var registros = contaDAO.pegarContasComoTexto(usuarioDAO.pegarDadosUsuarios())
+
+            var intent = Intent(this, ControladoraVisualizacaoRegistros::class.java);
+            intent.putExtra("registros", registros)
+            startActivity(intent);
         }
 
 
@@ -62,7 +68,7 @@ class ControladoraAberturaConta : AppCompatActivity() {
                   try {
 
                       var dataFormatada : DateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                      dataNascimento = LocalDate.parse(campoDataNascimento.toString(), dataFormatada);
+                      dataNascimento = LocalDate.parse(campoDataNascimento.text.toString(), dataFormatada);
 
                       var conta = montarConta(campoNome.text.toString(), dataNascimento,
                           campoLogin.text.toString(), campoSenha.text.toString())

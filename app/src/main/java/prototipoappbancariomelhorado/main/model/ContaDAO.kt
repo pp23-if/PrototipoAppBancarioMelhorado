@@ -74,32 +74,27 @@ class ContaDAO (context: Context) {
     }
 
 
-   /* fun pegarContasComoTexto() : String
+    fun pegarContasComoTexto(listaDeUsuarios : ArrayList<Usuario>) : String
     {
 
         var contas = "";
 
-        var listaDeUsuario = pegarDadosUsuarios()
-
         var recuperarDadosContas = bancoDeDados.readableDatabase
         val consulta = "SELECT * FROM Conta WHERE fkUsuario = ?"
 
-        listaDeUsuario.forEach { usuario ->
+        listaDeUsuarios.forEach { usuario ->
 
-            val argumentos = arrayOf(usuario.id.toString())
+            val argumentos = arrayOf(usuario.getIdUsuarioAtributo().toString())
 
             var cursorContas = recuperarDadosContas.rawQuery(consulta,argumentos);
 
             with(cursorContas) {
                 while (moveToNext()) {
 
-                    var numero = getInt(getColumnIndexOrThrow("numero"))
+                    var idConta = getInt(getColumnIndexOrThrow("idConta"))
                     var saldo = getDouble(getColumnIndexOrThrow("saldo"))
 
-                    var conta = Conta();
-                    conta.numero = numero;
-                    conta.saldo = saldo;
-                    conta.usuario = usuario;
+                    var conta = Conta(idConta, usuario, saldo)
 
                     contas += conta.toString() + "\n\n"
 
@@ -108,6 +103,6 @@ class ContaDAO (context: Context) {
             cursorContas.close()
         }
         return contas;
-    }*/
+    }
 
 }

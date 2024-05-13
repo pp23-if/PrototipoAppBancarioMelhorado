@@ -22,6 +22,7 @@
             </intent-filter>
         </activity>
         <activity android:name="prototipoappbancariomelhorado.main.controller.ControladoraAberturaConta" />
+        <activity android:name="prototipoappbancariomelhorado.main.controller.ControladoraVisualizacaoRegistros" />
     </application>
 
 </manifest>

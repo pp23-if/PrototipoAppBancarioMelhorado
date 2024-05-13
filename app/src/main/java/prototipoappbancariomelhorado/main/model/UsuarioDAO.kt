@@ -2,6 +2,8 @@ package prototipoappbancariomelhorado.main.model
 
 import android.content.ContentValues
 import android.content.Context
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import java.util.Locale
 
 class UsuarioDAO (context: Context) {
@@ -29,33 +31,33 @@ class UsuarioDAO (context: Context) {
         return login;
     }
 
-    /*fun pegarDadosUsuarios() : ArrayList<Usuario>
-    {
-        val listaDeUsuario = ArrayList<Usuario>();
 
-        var recuperarDadosCliente = bancoDeDados.readableDatabase
-        var cursorCliente = recuperarDadosCliente.rawQuery("select * from Usuario",null)
+    fun pegarDadosUsuarios(): ArrayList<Usuario> {
+        val listaDeUsuario = ArrayList<Usuario>()
 
-        with(cursorCliente) {
+        val recuperarDadosUsuario = bancoDeDados.readableDatabase
+        val cursorUsuario = recuperarDadosUsuario.rawQuery("select * from Usuario", null)
+
+        val dataFormatada: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+
+        with(cursorUsuario) {
             while (moveToNext()) {
+                val idUsuario = getInt(getColumnIndexOrThrow("idUsuario"))
+                val nome = getString(getColumnIndexOrThrow("nome"))
+                val dataNascimentoStr = getString(getColumnIndexOrThrow("dataNascimento"))
+                val login = getString(getColumnIndexOrThrow("login"))
+                val senha = getString(getColumnIndexOrThrow("senha"))
 
-                var id = getInt(getColumnIndexOrThrow("id"))
-                var nome = getString(getColumnIndexOrThrow("nome"))
-                var idade = getInt(getColumnIndexOrThrow("idade"))
+                val dataNascimentoFormatada = LocalDate.parse(dataNascimentoStr, dataFormatada)
 
+                val usuario = Usuario(idUsuario, nome, dataNascimentoFormatada, login, senha)
 
-                var usuario = Usuario()
-                usuario.id = id
-                usuario.nome = nome
-                usuario.idade = idade
-
-                listaDeUsuario.add(usuario);
-
+                listaDeUsuario.add(usuario)
             }
         }
-        cursorCliente.close()
+        cursorUsuario.close()
 
-        return listaDeUsuario;
-    }*/
+        return listaDeUsuario
+    }
 
 }
