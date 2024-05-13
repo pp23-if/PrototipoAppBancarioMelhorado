@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/yellow"
+    tools:context=".controller.MainActivity">
+
+    <View
+        android:id="@+id/ContainerLogin"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginHorizontal="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:background="@drawable/container_login"
+        />
+
+    <TextView
+        android:id="@+id/txtTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:textSize="25sp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="@id/ContainerLogin"
+        app:layout_constraintStart_toStartOf="@id/ContainerLogin"
+        app:layout_constraintEnd_toEndOf="@id/ContainerLogin"
+        android:layout_marginTop="33dp"
+        />
+
+    <TextView
+        android:id="@+id/txtDesc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Informe os seus dados de Usuário"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/txtTitle"
+        app:layout_constraintStart_toStartOf="@id/ContainerLogin"
+        app:layout_constraintEnd_toEndOf="@id/ContainerLogin"
+        android:layout_marginTop="10dp"
+        />
+
+    <EditText
+        android:id="@+id/editUserName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Usuário"
+        android:textCursorDrawable="@drawable/cursor_alterado"
+        android:textColor="@color/black"
+        android:background="@drawable/container_campo_dados_login"
+        app:layout_constraintTop_toBottomOf="@id/txtDesc"
+        app:layout_constraintStart_toStartOf="@id/ContainerLogin"
+        app:layout_constraintEnd_toEndOf="@id/ContainerLogin"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginTop="23dp"
+        android:padding="15dp"
+        android:inputType="text"
+        android:maxLines="1"
+        android:textColorHint="@color/black"
+        />
+
+    <EditText
+        android:id="@+id/editPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginVertical="10dp"
+        android:background="@drawable/container_campo_dados_login"
+        android:hint="Senha"
+        android:textCursorDrawable="@drawable/cursor_alterado"
+        android:inputType="text"
+        android:maxLines="1"
+        android:padding="15dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        app:layout_constraintEnd_toEndOf="@id/ContainerLogin"
+        app:layout_constraintStart_toStartOf="@id/ContainerLogin"
+        app:layout_constraintTop_toBottomOf="@id/editUserName" />
+
+
+    <TextView
+        android:id="@+id/txtAbrirConta"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="16dp"
+        android:text="Abrir conta"
+        android:textColor="@color/blue"
+        android:textSize="18dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/ContainerLogin"
+        app:layout_constraintStart_toStartOf="@id/ContainerLogin"
+        app:layout_constraintTop_toBottomOf="@id/editPassword" />
+
+    <Button
+        android:id="@+id/botaoDeLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="40dp"
+        android:backgroundTint="@color/blue"
+        android:padding="15dp"
+        android:text="Entrar"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:cornerRadius="30dp"
+        app:layout_constraintBottom_toBottomOf="@id/ContainerLogin"
+        app:layout_constraintEnd_toEndOf="@id/ContainerLogin"
+        app:layout_constraintStart_toStartOf="@id/ContainerLogin"
+        app:layout_constraintTop_toTopOf="@id/txtAbrirConta"
+        app:layout_constraintVertical_bias="0.516" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
