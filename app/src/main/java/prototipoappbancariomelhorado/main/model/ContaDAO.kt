@@ -1,5 +1,6 @@
 package prototipoappbancariomelhorado.main.model
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
 import java.util.Locale
@@ -94,6 +95,7 @@ class ContaDAO (context: Context) {
                     var idConta = getInt(getColumnIndexOrThrow("idConta"))
                     var saldo = getDouble(getColumnIndexOrThrow("saldo"))
 
+
                     var conta = Conta(idConta, usuario, saldo)
 
                     contas += conta.toString() + "\n\n"
@@ -103,6 +105,34 @@ class ContaDAO (context: Context) {
             cursorContas.close()
         }
         return contas;
+    }
+
+    @SuppressLint("SuspiciousIndentation")
+    fun pegarContaUsuario(usuario: Usuario) : Conta?
+    {
+
+        var recuperarDadosContas = bancoDeDados.readableDatabase
+        val consulta = "SELECT * FROM Conta WHERE fkUsuario = ?"
+
+        val argumentos = arrayOf(usuario.getIdUsuarioAtributo().toString())
+
+        var conta : Conta? = null
+
+        var cursorContas = recuperarDadosContas.rawQuery(consulta,argumentos);
+
+            with(cursorContas) {
+                while (moveToNext()) {
+
+                    var idConta = getInt(getColumnIndexOrThrow("idConta"))
+                    var saldo = getDouble(getColumnIndexOrThrow("saldo"))
+
+                    conta = Conta(idConta, usuario, saldo)
+
+                }
+            }
+            cursorContas.close()
+
+        return conta;
     }
 
 }

@@ -23,6 +23,7 @@
         </activity>
         <activity android:name="prototipoappbancariomelhorado.main.controller.ControladoraAberturaConta" />
         <activity android:name="prototipoappbancariomelhorado.main.controller.ControladoraVisualizacaoRegistros" />
+        <activity android:name="prototipoappbancariomelhorado.main.controller.ControladoraUsuarioLogado" />
     </application>
 
 </manifest>

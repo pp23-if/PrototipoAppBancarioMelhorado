@@ -60,4 +60,32 @@ class UsuarioDAO (context: Context) {
         return listaDeUsuario
     }
 
+    fun pegarDadosUsuarioPorLoginSenha(login: String, senha: String): Usuario? {
+
+        val recuperarDadosUsuario = bancoDeDados.readableDatabase
+        val cursorUsuario = recuperarDadosUsuario.rawQuery("SELECT * FROM Usuario WHERE login = ? AND senha = ?", arrayOf(login, senha))
+
+        val dataFormatada: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+
+        var usuario : Usuario? = null
+
+        with(cursorUsuario) {
+            while (moveToNext()) {
+                val idUsuario = getInt(getColumnIndexOrThrow("idUsuario"))
+                val nome = getString(getColumnIndexOrThrow("nome"))
+                val dataNascimentoStr = getString(getColumnIndexOrThrow("dataNascimento"))
+                val login = getString(getColumnIndexOrThrow("login"))
+                val senha = getString(getColumnIndexOrThrow("senha"))
+
+                val dataNascimentoFormatada = LocalDate.parse(dataNascimentoStr, dataFormatada)
+
+                usuario = Usuario(idUsuario, nome, dataNascimentoFormatada, login, senha)
+
+            }
+        }
+        cursorUsuario.close()
+
+        return usuario
+    }
+
 }
