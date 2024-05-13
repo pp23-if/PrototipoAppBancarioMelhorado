@@ -7,7 +7,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import prototipoappbancariomelhorado.main.R
-import prototipoappbancariomelhorado.main.model.Usuario
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 
         linkCadastro.setOnClickListener()
         {
-            var intent = Intent(this, ControladoraCadastroUsuario::class.java);
+            var intent = Intent(this, ControladoraAberturaConta::class.java);
             startActivity(intent);
         }
 
