@@ -2,7 +2,7 @@ package prototipoappbancariomelhorado.main.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
-import java.time.format.DateTimeFormatter
+
 
 @Parcelize
 class Conta (private var idConta : Int, private var usuario: Usuario, private var saldoConta : Double) : Parcelable

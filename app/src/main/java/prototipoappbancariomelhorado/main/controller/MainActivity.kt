@@ -1,5 +1,6 @@
 package prototipoappbancariomelhorado.main.controller
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -19,6 +20,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var botaoEntrar : Button;
     lateinit var campoLogin : EditText;
     lateinit var campoSenha : EditText;
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,7 +44,7 @@ class MainActivity : AppCompatActivity() {
           {
              if(fazerLogin(campoLogin.text.toString(), campoSenha.text.toString(), usuarioDAO, contaDAO))
              {
-               var conta = pegarContaUsuarioLogado(campoLogin.text.toString(), campoSenha.text.toString(), contaDAO, usuarioDAO)
+                 var conta = pegarContaUsuarioLogado(campoLogin.text.toString(), campoSenha.text.toString(), contaDAO, usuarioDAO)
 
                  limparCampos()
 
