@@ -5,7 +5,7 @@ import android.content.ContentValues
 import android.content.Context
 import java.util.Locale
 
-class ContaDAO (context: Context) {
+class ContaDAO(context: Context) {
 
     var bancoDeDados = BancoDeDados(context);
 
@@ -20,7 +20,10 @@ class ContaDAO (context: Context) {
             val contentValuesUsuario = ContentValues().apply {
 
                 put("nome", conta.getUsuarioAtributo().getNomeUsuarioAtributo())
-                put("dataNascimento", conta.getUsuarioAtributo().getDataDeNascimentoUsuarioAtributo().toString())
+                put(
+                    "dataNascimento",
+                    conta.getUsuarioAtributo().getDataDeNascimentoUsuarioAtributo().toString()
+                )
                 put("login", conta.getUsuarioAtributo().getLoginUsuarioAtributo())
                 put("senha", conta.getUsuarioAtributo().getSenhaUsuarioAtributo())
             }
@@ -54,15 +57,14 @@ class ContaDAO (context: Context) {
         }
     }
 
-    fun pegaIdUsuarioRecemInserido(conta: Conta) : Int
-    {
+    fun pegaIdUsuarioRecemInserido(conta: Conta): Int {
 
-        var idUsuario : Int = -1
+        var idUsuario: Int = -1
 
         var recuperarIdUsuario = bancoDeDados.readableDatabase
         val consulta = "SELECT idUsuario FROM Usuario WHERE login = ?"
         val argumentos = arrayOf(conta.getUsuarioAtributo().getLoginUsuarioAtributo())
-        var cursorIdUsuario = recuperarIdUsuario.rawQuery(consulta,argumentos);
+        var cursorIdUsuario = recuperarIdUsuario.rawQuery(consulta, argumentos);
 
         with(cursorIdUsuario) {
             while (moveToNext()) {
@@ -75,8 +77,7 @@ class ContaDAO (context: Context) {
     }
 
 
-    fun pegarContasComoTexto(listaDeUsuarios : ArrayList<Usuario>) : String
-    {
+    fun pegarContasComoTexto(listaDeUsuarios: ArrayList<Usuario>): String {
 
         var contas = "";
 
@@ -87,7 +88,7 @@ class ContaDAO (context: Context) {
 
             val argumentos = arrayOf(usuario.getIdUsuarioAtributo().toString())
 
-            var cursorContas = recuperarDadosContas.rawQuery(consulta,argumentos);
+            var cursorContas = recuperarDadosContas.rawQuery(consulta, argumentos);
 
             with(cursorContas) {
                 while (moveToNext()) {
@@ -108,31 +109,49 @@ class ContaDAO (context: Context) {
     }
 
     @SuppressLint("SuspiciousIndentation")
-    fun pegarContaUsuario(usuario: Usuario) : Conta?
-    {
+    fun pegarContaUsuario(usuario: Usuario): Conta? {
 
         var recuperarDadosContas = bancoDeDados.readableDatabase
         val consulta = "SELECT * FROM Conta WHERE fkUsuario = ?"
 
         val argumentos = arrayOf(usuario.getIdUsuarioAtributo().toString())
 
-        var conta : Conta? = null
+        var conta: Conta? = null
 
-        var cursorContas = recuperarDadosContas.rawQuery(consulta,argumentos);
+        var cursorContas = recuperarDadosContas.rawQuery(consulta, argumentos);
 
-            with(cursorContas) {
-                while (moveToNext()) {
+        with(cursorContas) {
+            while (moveToNext()) {
 
-                    var idConta = getInt(getColumnIndexOrThrow("idConta"))
-                    var saldo = getDouble(getColumnIndexOrThrow("saldo"))
+                var idConta = getInt(getColumnIndexOrThrow("idConta"))
+                var saldo = getDouble(getColumnIndexOrThrow("saldo"))
 
-                    conta = Conta(idConta, usuario, saldo)
+                conta = Conta(idConta, usuario, saldo)
 
-                }
             }
-            cursorContas.close()
+        }
+        cursorContas.close()
 
         return conta;
+    }
+
+    fun pegaSaldoConta(conta: Conta): Double {
+
+        var saldoConta: Double = 0.0
+
+        var recuperarSaldoConta = bancoDeDados.readableDatabase
+        val consulta = "SELECT saldo FROM Conta WHERE idConta = ?"
+        val argumentos = arrayOf(conta.getIdContaAtributo().toString())
+        var cursorSaldoConta = recuperarSaldoConta.rawQuery(consulta, argumentos);
+
+        with(cursorSaldoConta) {
+            while (moveToNext()) {
+                saldoConta = getDouble(getColumnIndexOrThrow("saldo"))
+            }
+        }
+        cursorSaldoConta.close()
+
+        return saldoConta;
     }
 
 }

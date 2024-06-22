@@ -28,4 +28,17 @@
     <string name="n_o_foi_poss_vel_abrir_sua_conta_verifique_a_data_informada">Não foi possível abrir sua conta, verifique a data informada.</string>
     <string name="impossibilidade">Impossibilidade</string>
     <string name="no_momento_n_o_foi_poss_vel_abrir_sua_conta_por_favor_verifique_os_dados_informados">No momento não foi possível abrir sua conta. Por favor verifique os dados informados.</string>
+    <string name="deposito">Depósito</string>
+    <string name="depositar">Depositar</string>
+    <string name="valor">Valor</string>
+    <string name="saque">Saque</string>
+    <string name="sacar">Sacar</string>
+    <string name="valorIncorreto">Valor incorreto!</string>
+    <string name="erroValor">Por favor verifique o valor informado.</string>
+    <string name="depositoSucesso">Depósito realizado\ncom sucesso!</string>
+    <string name="impossiblidadeDeposito">No momento não foi possível realizar o depósito. Tente novamente mais tarde.</string>
+    <string name="semSaldo">Saldo insuficiente!</string>
+    <string name="semSaldoConta">Você não possui saldo suficente na sua conta para o valor informado.</string>
+    <string name="saqueSucesso">Saque realizado\ncom sucesso!</string>
+    <string name="impossiblidadeSaque">No momento não foi possível realizar o saque. Tente novamente mais tarde.</string>
 </resources>

@@ -6,4 +6,9 @@
     </style>
 
     <style name="Theme.PrototipoAppBancarioMelhorado" parent="Base.Theme.PrototipoAppBancarioMelhorado" />
+
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Outros atributos de tema -->
+        <item name="android:textColorHint">@color/black</item>
+    </style>
 </resources>

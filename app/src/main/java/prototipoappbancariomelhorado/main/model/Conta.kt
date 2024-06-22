@@ -1,5 +1,6 @@
 package prototipoappbancariomelhorado.main.model
 
+import android.icu.text.DecimalFormat
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
@@ -33,8 +34,11 @@ class Conta (private var idConta : Int, private var usuario: Usuario, private va
 
     override fun toString(): String {
 
+        val decimalFormat = DecimalFormat("#.##")
+        val saldoFormatado  = decimalFormat.format(this.saldoConta)
+
         return "Conta: " + this.idConta + "\n" +
                 this.usuario + "\n" +
-                "Saldo: " + this.saldoConta +"\n"
+                "Saldo: " + saldoFormatado +"\n"
     }
 }

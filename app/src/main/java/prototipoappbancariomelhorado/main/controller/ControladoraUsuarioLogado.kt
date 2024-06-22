@@ -1,5 +1,7 @@
 package prototipoappbancariomelhorado.main.controller
 
+import android.content.Intent
+import android.icu.text.DecimalFormat
 import android.os.Build
 import android.os.Bundle
 import android.widget.Toast
@@ -8,6 +10,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import prototipoappbancariomelhorado.main.R
 import prototipoappbancariomelhorado.main.databinding.ActivityUsuarioLogadoBinding
 import prototipoappbancariomelhorado.main.model.Conta
+import prototipoappbancariomelhorado.main.model.ContaDAO
+import prototipoappbancariomelhorado.main.model.Usuario
+import prototipoappbancariomelhorado.main.model.UsuarioDAO
 
 
 class ControladoraUsuarioLogado : AppCompatActivity(), OnOperacaoClickListener {
@@ -15,20 +20,29 @@ class ControladoraUsuarioLogado : AppCompatActivity(), OnOperacaoClickListener {
     private lateinit var binding: ActivityUsuarioLogadoBinding
     private lateinit var adaptadorDeOperacoesBancarias: AdaptadorOperacoesBancarias
     private val listaDeOperacoesBancarias: MutableList<OperacoesBancarias> = mutableListOf()
+    private  var conta: Conta? = null
+    var usuarioDAO = UsuarioDAO(this)
+    var contaDAO = ContaDAO(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityUsuarioLogadoBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val conta = pegaContaDaActivityAnterior(intent.extras) as Conta
-
-        insereNoTextViewNomeUsuarioLogado(conta)
-        insereNoTextViewSaldoUsuarioLogado(conta)
+        conta = pegaContaDaActivityAnterior(intent.extras) as Conta
 
         setupRecyclerView()
         listaIconesOperacoesBancarias()
     }
+
+    override fun onResume() {
+        super.onResume()
+        conta = sincronizaContaComBancoDeDados(usuarioDAO, contaDAO, conta!!.getUsuarioAtributo())
+
+        insereNoTextViewNomeUsuarioLogado(conta!!)
+        insereNoTextViewSaldoUsuarioLogado(conta!!)
+    }
+
 
     private fun setupRecyclerView() {
         val recyclerIcones = binding.reciclerIconesBancarios
@@ -44,9 +58,16 @@ class ControladoraUsuarioLogado : AppCompatActivity(), OnOperacaoClickListener {
 
             R.drawable.depositar -> {
 
+                var intent = Intent(this, ControladoraDeposito::class.java);
+                intent.putExtra("conta", conta)
+                startActivity(intent);
             }
 
             R.drawable.sacar -> {
+
+                var intent = Intent(this, ControladoraSaque::class.java);
+                intent.putExtra("conta", conta)
+                startActivity(intent);
 
             }
 
@@ -97,7 +118,11 @@ class ControladoraUsuarioLogado : AppCompatActivity(), OnOperacaoClickListener {
     }
 
     private fun insereNoTextViewSaldoUsuarioLogado(conta: Conta) {
-        val saldoUsuarioLogado = conta.getSaldoContaAtributo().toString()
+
+        val decimalFormat = DecimalFormat("#.##")
+        val saldoFormatado  = decimalFormat.format(conta.getSaldoContaAtributo())
+
+        val saldoUsuarioLogado = "Saldo: R$ $saldoFormatado"
         binding.txtSaldoUsuarioLogado.text = saldoUsuarioLogado
     }
 
@@ -112,5 +137,14 @@ class ControladoraUsuarioLogado : AppCompatActivity(), OnOperacaoClickListener {
             add(OperacoesBancarias(R.drawable.atualizar_meus_dados, "Atualizar meus dados"))
             add(OperacoesBancarias(R.drawable.sair, "Sair"))
         }
+    }
+
+    fun sincronizaContaComBancoDeDados (usuarioDAO: UsuarioDAO, contaDAO: ContaDAO, usuario: Usuario) : Conta?
+    {
+       var usuarioAtualizado = usuarioDAO.pegarDadosUsuarioPorID(usuario)
+
+        var conta = usuarioAtualizado?.let { contaDAO.pegarContaUsuario(it) }
+
+        return conta
     }
 }
