@@ -90,6 +90,9 @@ class ControladoraUsuarioLogado : AppCompatActivity(), OnOperacaoClickListener {
 
             R.drawable.meus_dados -> {
 
+                var intent = Intent(this, ControladoraPerfil::class.java);
+                intent.putExtra("conta", conta)
+                startActivity(intent);
 
             }
 
