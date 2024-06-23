@@ -41,4 +41,9 @@
     <string name="semSaldoConta">Você não possui saldo suficente na sua conta para o valor informado.</string>
     <string name="saqueSucesso">Saque realizado\ncom sucesso!</string>
     <string name="impossiblidadeSaque">No momento não foi possível realizar o saque. Tente novamente mais tarde.</string>
+    <string name="item_label">Conta</string>
+    <string name="transferencia">Transferência</string>
+    <string name="transferir">Transferir</string>
+    <string name="impossiblidadeTransferencia">No momento não foi possível realizar a transferência. Tente novamente mais tarde.</string>
+    <string name="transferenciaSucesso">Transferência realizada\ncom sucesso!</string>
 </resources>

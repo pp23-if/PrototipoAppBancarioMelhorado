@@ -27,6 +27,7 @@
         <activity android:name="prototipoappbancariomelhorado.main.controller.UsuarioLogado" />
         <activity android:name="prototipoappbancariomelhorado.main.controller.ControladoraDeposito" />
         <activity android:name="prototipoappbancariomelhorado.main.controller.ControladoraSaque" />
+        <activity android:name="prototipoappbancariomelhorado.main.controller.ControladoraTransferencia" />
     </application>
 
 </manifest>

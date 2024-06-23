@@ -9,6 +9,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import prototipoappbancariomelhorado.main.R
+import prototipoappbancariomelhorado.main.model.BancoDeDados
 import prototipoappbancariomelhorado.main.model.Conta
 import prototipoappbancariomelhorado.main.model.ContaDAO
 import prototipoappbancariomelhorado.main.model.Usuario
@@ -26,6 +27,7 @@ class ControladoraAberturaConta : AppCompatActivity() {
     lateinit var campoLogin : EditText;
     lateinit var campoSenha : EditText;
     lateinit var dialog : AlertDialog;
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -198,4 +200,5 @@ class ControladoraAberturaConta : AppCompatActivity() {
         dialog.show()
 
     }
+
 }

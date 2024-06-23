@@ -65,9 +65,9 @@ class Transferencia (private var idTransferencia : Int, private var contaEntrada
         val formatadorDataHora = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")
 
         return  "ID Transferência: " + this.idTransferencia + "\n" +
-                "Conta De Destino: " + this.contaEntrada.getIdContaAtributo() + "\n" +
+                "Conta De Origem: " + this.contaEntrada.getIdContaAtributo() + "\n" +
                 "Titular: " + this.contaEntrada.getUsuarioAtributo().getNomeUsuarioAtributo() + "\n" +
-                "Conta De Origem: " + this.contaSaida.getIdContaAtributo() +"\n" +
+                "Conta De Destino: " + this.contaSaida.getIdContaAtributo() +"\n" +
                 "Titular: " + this.contaSaida.getUsuarioAtributo().getNomeUsuarioAtributo() + "\n" +
                 "Tipo De Transferência: " + this.tipoTransferencia +"\n" +
                 "Valor Transferência: " + this.valorTransferencia +"\n" +

@@ -48,20 +48,31 @@ class ControladoraSaque : AppCompatActivity() {
             {
                 if(trataValorSaque())
                 {
+
                     var valorSaque = campoValorSaque.text.toString().toDouble()
 
                     var movimentacao = Movimentacao(0, conta, "debito", valorSaque, LocalDateTime.now())
                     var contaDAO = ContaDAO(this)
                     var movimentacaoDAO = MovimentacaoDAO(this)
 
-                    if(movimentacaoDAO.realizarMovimentacao(movimentacao, calculaSaldoAtualizadoContaSaque(valorSaque, contaDAO, conta)))
+                    var saldoEmConta = contaDAO.pegaSaldoConta(conta)
+
+                    if(verificaSaldoInsuficienteSaque(valorSaque, saldoEmConta))
                     {
-                        caixaDeDialogoSucessoMovimentacaoSaque()
-                        limparCampos()
+                        if(movimentacaoDAO.realizarMovimentacao(movimentacao, calculaSaldoAtualizadoContaSaque(valorSaque, contaDAO, conta)))
+                        {
+                            caixaDeDialogoSucessoMovimentacaoSaque()
+                            limparCampos()
+                        }
+                        else
+                        {
+                            caixaDeDialogoImpossibilidadeSaque()
+                        }
+
                     }
                     else
                     {
-                        caixaDeDialogoImpossibilidadeSaque()
+                      caixaDeDialogoSaldoInsuficiente()
                     }
 
                 }
@@ -121,6 +132,11 @@ class ControladoraSaque : AppCompatActivity() {
         return saldoAtualizado
     }
 
+    fun verificaSaldoInsuficienteSaque (valorSaque: Double, saldoEmConta : Double) : Boolean
+    {
+        return valorSaque > 0 && valorSaque <= saldoEmConta
+    }
+
     fun caixaDeDialogoValorSaqueIncorreto()
     {
         val build = AlertDialog.Builder(this)
@@ -157,6 +173,20 @@ class ControladoraSaque : AppCompatActivity() {
         build.setView(view);
 
         var botaoErro = view.findViewById<Button>(R.id.botaoImpossibilidadeSaque);
+        botaoErro.setOnClickListener{dialog.dismiss()}
+        dialog = build.create()
+        dialog.show()
+
+    }
+
+    fun caixaDeDialogoSaldoInsuficiente()
+    {
+        val build = AlertDialog.Builder(this)
+        val view = layoutInflater.inflate(R.layout.activity_caixa_dialogo_saldo_insuficiente, null)
+
+        build.setView(view);
+
+        var botaoErro = view.findViewById<Button>(R.id.botaoSaldoInsuficiente);
         botaoErro.setOnClickListener{dialog.dismiss()}
         dialog = build.create()
         dialog.show()

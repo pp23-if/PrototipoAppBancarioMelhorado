@@ -34,9 +34,7 @@ class MovimentacaoDAO (context: Context) {
             /*Aqui comeca os operacoes no banco de dados, de UPDATE SALDO CONTA*/
 
             val contentValuesAtualizacaoSaldoConta = ContentValues().apply {
-
                 put("saldo", saldoAtualizado)
-                put("idConta", movimentacao.getContaAtributo().getIdContaAtributo())
             }
             //val inseridoConta = db.insert("Conta", null, contentValuesConta) != -1L
 

@@ -73,6 +73,9 @@ class ControladoraUsuarioLogado : AppCompatActivity(), OnOperacaoClickListener {
 
             R.drawable.transferencia -> {
 
+                var intent = Intent(this, ControladoraTransferencia::class.java);
+                intent.putExtra("conta", conta)
+                startActivity(intent);
             }
 
            R.drawable.movimentacoes -> {

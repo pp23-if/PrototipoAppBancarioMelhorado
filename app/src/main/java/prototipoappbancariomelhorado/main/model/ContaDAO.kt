@@ -3,6 +3,7 @@ package prototipoappbancariomelhorado.main.model
 import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
+import java.util.LinkedList
 import java.util.Locale
 
 class ContaDAO(context: Context) {
@@ -152,6 +153,40 @@ class ContaDAO(context: Context) {
         cursorSaldoConta.close()
 
         return saldoConta;
+    }
+
+    fun pegarContasExcetoUsuarioLogado(listaDeUsuarios: ArrayList<Usuario>): LinkedList <SelecaoConta> {
+
+        var recuperarDadosContas = bancoDeDados.readableDatabase
+        val consulta = "SELECT * FROM Conta WHERE fkUsuario = ?"
+
+        var listaDeSelecaoContas = LinkedList<SelecaoConta>()
+
+
+        listaDeUsuarios.forEach { usuario ->
+
+            val argumentos = arrayOf(usuario.getIdUsuarioAtributo().toString())
+
+            var cursorContas = recuperarDadosContas.rawQuery(consulta, argumentos);
+
+            with(cursorContas) {
+                while (moveToNext()) {
+
+                    var idConta = getInt(getColumnIndexOrThrow("idConta"))
+                    var saldo = getDouble(getColumnIndexOrThrow("saldo"))
+
+                    var conta = Conta(idConta, usuario, saldo)
+
+                    var selecaoConta = SelecaoConta(conta)
+
+                    listaDeSelecaoContas.add(selecaoConta)
+
+                }
+            }
+            cursorContas.close()
+        }
+
+        return listaDeSelecaoContas;
     }
 
 }

@@ -5,7 +5,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 
 // Factory -> Used to allow returning sub-classes of Cursor when calling query.
-class BancoDeDados(context: Context) : SQLiteOpenHelper(context, "BancoDeDados", null, 1)
+class BancoDeDados(context: Context) : SQLiteOpenHelper(context, "BancoDeDados", null, 2)
 {
     override fun onCreate(db: SQLiteDatabase)
     {
@@ -99,6 +99,4 @@ class BancoDeDados(context: Context) : SQLiteOpenHelper(context, "BancoDeDados",
 
         onCreate(db)
     }
-
-
 }
