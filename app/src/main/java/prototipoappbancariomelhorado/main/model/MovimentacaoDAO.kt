@@ -3,6 +3,11 @@ package prototipoappbancariomelhorado.main.model
 import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
+import android.util.Log
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.LinkedList
 import java.util.Locale
 
 class MovimentacaoDAO (context: Context) {
@@ -57,6 +62,38 @@ class MovimentacaoDAO (context: Context) {
             // Fecha o banco de dados
             db.close()
         }
+    }
+
+    fun pegarMovimentacoesConta(conta: Conta): LinkedList<Movimentacao> {
+
+        val listaDeMovimentacoes = LinkedList<Movimentacao>()
+
+        val recuperarDadosMovimentacoes = bancoDeDados.readableDatabase
+        val cursorMovimentacoes = recuperarDadosMovimentacoes.rawQuery("SELECT * FROM Movimentacao WHERE fkConta = ?",
+            arrayOf(conta.getIdContaAtributo().toString()))
+
+        val dataFormatada: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+
+        with(cursorMovimentacoes) {
+            while (moveToNext()) {
+
+                val idMovimentacao = getInt(getColumnIndexOrThrow("idMovimentacao"))
+                val tipoMovimentacao = getString(getColumnIndexOrThrow("tipoMovimentacao"))
+                val valorMovimentacao = getDouble(getColumnIndexOrThrow("valorMovimentacao"))
+                val dataMovimentacao = getString(getColumnIndexOrThrow("dataMovimentacao"))
+
+                var dataAposTratamento  = dataMovimentacao.substring(0, 19).replace("T", " ");
+
+                val dataMovimentacaoFormatada = LocalDateTime.parse(dataAposTratamento, dataFormatada)
+
+                val movimentacao = Movimentacao(idMovimentacao, conta, tipoMovimentacao, valorMovimentacao, dataMovimentacaoFormatada)
+
+                listaDeMovimentacoes.add(movimentacao)
+            }
+        }
+        cursorMovimentacoes.close()
+
+        return listaDeMovimentacoes
     }
 
 }

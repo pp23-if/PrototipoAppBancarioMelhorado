@@ -78,8 +78,11 @@ class ControladoraUsuarioLogado : AppCompatActivity(), OnOperacaoClickListener {
                 startActivity(intent);
             }
 
-           R.drawable.movimentacoes -> {
+            R.drawable.movimentacoes -> {
 
+                var intent = Intent(this, ControladoraMovimentacoes::class.java);
+                intent.putExtra("conta", conta)
+                startActivity(intent);
 
             }
 
@@ -105,8 +108,7 @@ class ControladoraUsuarioLogado : AppCompatActivity(), OnOperacaoClickListener {
             }
 
              R.drawable.sair -> {
-
-
+                 fazerLogout()
             }
         }
     }
@@ -155,5 +157,11 @@ class ControladoraUsuarioLogado : AppCompatActivity(), OnOperacaoClickListener {
         var conta = usuarioAtualizado?.let { contaDAO.pegarContaUsuario(it) }
 
         return conta
+    }
+
+    fun fazerLogout ()
+    {
+        conta = null
+        this.finish()
     }
 }
