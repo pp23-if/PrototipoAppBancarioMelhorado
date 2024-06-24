@@ -98,6 +98,9 @@ class ControladoraUsuarioLogado : AppCompatActivity(), OnOperacaoClickListener {
 
              R.drawable.atualizar_meus_dados -> {
 
+                 var intent = Intent(this, ControladoraAtualizacaoUsuario::class.java);
+                 intent.putExtra("conta", conta)
+                 startActivity(intent);
 
             }
 

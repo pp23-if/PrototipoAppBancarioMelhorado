@@ -46,4 +46,16 @@
     <string name="transferir">Transferir</string>
     <string name="impossiblidadeTransferencia">No momento não foi possível realizar a transferência. Tente novamente mais tarde.</string>
     <string name="transferenciaSucesso">Transferência realizada\ncom sucesso!</string>
+    <string name="atualizar">Atualizar</string>
+    <string name="atualizarDadosCliente">Atualização</string>
+    <string name="nome">Nome</string>
+    <string name="dataNascimento">Data de nascimento</string>
+    <string name="usuario">Usuário</string>
+    <string name="senha">Senha</string>
+    <string name="erroData">Não foi possível atualizar seus dados, verifique a data informada.</string>
+    <string name="usuarioExistente">Usuário existente!</string>
+    <string name="textoUsuarioExistente">O usuário informado já\nse encontra cadastrado.</string>
+    <string name="atualizacaoUsuario">No momento não foi possível atualizar os dados. Por favor verifique os dados informados e tente novamente mais tarde.</string>
+    <string name="usuarioAtualizadoSucesso">Dados atualizados com sucesso!</string>
+    <string name="erroDataAtualizacao">Não foi possível atualizar sua data de nascimento, por favor verifique a data informada.</string>
 </resources>

@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/yellow">
+
+    <View
+        android:id="@+id/ContainerAtualizacaoCliente"
+        android:layout_width="match_parent"
+        android:layout_height="550dp"
+        android:layout_marginHorizontal="20dp"
+        android:background="@drawable/container_abertura_conta"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtTitleDeposito"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="33dp"
+        android:text="@string/atualizarDadosCliente"
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@id/ContainerAtualizacaoCliente"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@id/ContainerAtualizacaoCliente"
+        app:layout_constraintTop_toTopOf="@id/ContainerAtualizacaoCliente" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/materialTextFieldNomeUsuarioAlteracao"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="348dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="32dp"
+        android:hint="@string/nome"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        app:boxStrokeColor="@color/black"
+        app:hintTextColor="@color/black"
+        app:layout_constraintEnd_toEndOf="@id/ContainerAtualizacaoCliente"
+        app:layout_constraintStart_toStartOf="@id/ContainerAtualizacaoCliente"
+        app:layout_constraintTop_toBottomOf="@id/txtTitleDeposito">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textFieldValorNomeUsuario"
+            android:layout_width="match_parent"
+            android:layout_height="51dp"
+            android:layout_marginBottom="4dp"
+            android:background="@null"
+            android:padding="12dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textCursorDrawable="@drawable/cursor_alterado"
+            app:hintTextColor="@color/black" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/materialTextFieldDataNascimentoUsuarioAlteracao"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="348dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="32dp"
+        android:hint="@string/dataNascimento"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        app:boxStrokeColor="@color/black"
+        app:hintTextColor="@color/black"
+        app:layout_constraintEnd_toEndOf="@id/ContainerAtualizacaoCliente"
+        app:layout_constraintStart_toStartOf="@id/ContainerAtualizacaoCliente"
+        app:layout_constraintTop_toBottomOf="@id/materialTextFieldNomeUsuarioAlteracao">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textFieldValorDataNascimentoUsuario"
+            android:layout_width="match_parent"
+            android:layout_height="51dp"
+            android:layout_marginBottom="4dp"
+            android:background="@null"
+            android:padding="12dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textCursorDrawable="@drawable/cursor_alterado"
+            app:hintTextColor="@color/black" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/materialTextFieldLoginUsuarioAlteracao"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="348dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="32dp"
+        android:hint="@string/usuario"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        app:boxStrokeColor="@color/black"
+        app:hintTextColor="@color/black"
+        app:layout_constraintEnd_toEndOf="@id/ContainerAtualizacaoCliente"
+        app:layout_constraintStart_toStartOf="@id/ContainerAtualizacaoCliente"
+        app:layout_constraintTop_toBottomOf="@id/materialTextFieldDataNascimentoUsuarioAlteracao">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textFieldValorLoginUsuario"
+            android:layout_width="match_parent"
+            android:layout_height="51dp"
+            android:layout_marginBottom="4dp"
+            android:background="@null"
+            android:padding="12dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textCursorDrawable="@drawable/cursor_alterado"
+            app:hintTextColor="@color/black" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/materialTextFieldSenhaUsuarioAlteracao"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="348dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="32dp"
+        android:hint="@string/senha"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        app:boxStrokeColor="@color/black"
+        app:hintTextColor="@color/black"
+        app:layout_constraintEnd_toEndOf="@id/ContainerAtualizacaoCliente"
+        app:layout_constraintStart_toStartOf="@id/ContainerAtualizacaoCliente"
+        app:layout_constraintTop_toBottomOf="@id/materialTextFieldLoginUsuarioAlteracao">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/textFieldValorSenhaUsuario"
+            android:layout_width="match_parent"
+            android:layout_height="51dp"
+            android:layout_marginBottom="4dp"
+            android:background="@null"
+            android:padding="12dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textCursorDrawable="@drawable/cursor_alterado"
+            app:hintTextColor="@color/black" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+    <Button
+        android:id="@+id/botaoAtualizarCliente"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="100dp"
+        android:layout_marginBottom="24dp"
+        android:backgroundTint="@color/blue"
+        android:padding="15dp"
+        android:text="@string/atualizar"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:cornerRadius="30dp"
+        app:layout_constraintBottom_toBottomOf="@id/ContainerAtualizacaoCliente"
+        app:layout_constraintEnd_toEndOf="@id/ContainerAtualizacaoCliente"
+        app:layout_constraintHorizontal_bias="0.462"
+        app:layout_constraintStart_toStartOf="@id/ContainerAtualizacaoCliente" />
+
+    <TextView
+        android:id="@+id/botaoVoltarAtualizacaoCliente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="27dp"
+        android:layout_marginTop="33dp"
+        android:layout_marginBottom="33dp"
+        android:background="@drawable/baseline_arrow_back_24"
+        app:layout_constraintBottom_toTopOf="@+id/materialTextFieldNomeUsuarioAlteracao"
+        app:layout_constraintEnd_toStartOf="@+id/txtTitleDeposito"
+        app:layout_constraintHorizontal_bias="0.245"
+        app:layout_constraintStart_toStartOf="@+id/ContainerAtualizacaoCliente"
+        app:layout_constraintTop_toTopOf="@+id/ContainerAtualizacaoCliente"
+        app:layout_constraintVertical_bias="0.0" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+

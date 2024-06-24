@@ -31,6 +31,25 @@ class UsuarioDAO (context: Context) {
         return login;
     }
 
+    fun verificaExistenciaLoginInformadoAtualizacao(login : String, conta: Conta) : String
+    {
+
+        var verificarLogin = bancoDeDados.readableDatabase
+        val consulta = "SELECT login FROM Usuario WHERE (login = ? or login = ?) and login != ?"
+        val argumentos = arrayOf(login.lowercase(), login.uppercase(), conta.getUsuarioAtributo().getLoginUsuarioAtributo())
+        var cursorLoginUsuario = verificarLogin.rawQuery(consulta,argumentos);
+
+        var loginEncontrado = "";
+
+        with(cursorLoginUsuario) {
+            while (moveToNext()) {
+                loginEncontrado = getString(getColumnIndexOrThrow("login"))
+            }
+        }
+        cursorLoginUsuario.close()
+
+        return loginEncontrado;
+    }
 
     fun pegarDadosUsuarios(): ArrayList<Usuario> {
         val listaDeUsuario = ArrayList<Usuario>()
@@ -114,6 +133,28 @@ class UsuarioDAO (context: Context) {
         cursorUsuario.close()
 
         return usuario
+    }
+
+
+    fun atualizarDadosUsuario(usuario: Usuario, usuarioAtualizado: Usuario) : Boolean
+    {
+        val atualizacaoUsuario = bancoDeDados.writableDatabase
+        var blocoDeValores = ContentValues().apply {
+
+            put("nome", usuarioAtualizado.getNomeUsuarioAtributo())
+            put("dataNascimento", usuarioAtualizado.getDataDeNascimentoUsuarioAtributo().toString())
+            put("login", usuarioAtualizado.getLoginUsuarioAtributo())
+            put("senha", usuarioAtualizado.getSenhaUsuarioAtributo())
+
+        }
+
+        val condicao = "idUsuario = ? and login = ?"
+        val argumentos = arrayOf(usuario.getIdUsuarioAtributo().toString(), usuario.getLoginUsuarioAtributo())
+
+        val confirmaAtualizacao = atualizacaoUsuario.update("Usuario", blocoDeValores, condicao, argumentos)
+
+        return confirmaAtualizacao >= 1
+
     }
 
 
