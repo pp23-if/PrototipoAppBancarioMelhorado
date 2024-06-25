@@ -61,4 +61,9 @@
     <string name="movimentacoes">Minhas movimentações</string>
     <string name="cone_de_refer_ncia">Ícone de referência</string>
     <string name="transferencias">Minhas transferências</string>
+    <string name="mensagemValidacaoCamposVazios">Por favor, preencha todos os campos.</string>
+    <string name="mensagemLoginInvalido">Não foi possível fazer o login, \npor favor verifique os dados informados.</string>
+    <string name="mensagemEntradaESelecaoVazia">Por favor, selecione e preencha\ntodos os campos.</string>
+    <string name="mensagemSemMovimentacoes">Você ainda não realizou \nnenhuma movimentação.</string>
+    <string name="mensagemSemTransferencia">Você ainda não fez ou recebeu\nnenhuma transferencia.</string>
 </resources>

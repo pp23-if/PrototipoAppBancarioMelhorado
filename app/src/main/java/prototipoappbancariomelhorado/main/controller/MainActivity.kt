@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         {
           if(verificaEntradasVazias(campoLogin.text.toString(), campoSenha.text.toString()))
           {
-              Toast.makeText(this, "Por favor, preencha todos os campos.", Toast.LENGTH_SHORT).show()
+              criarToastCustomizadoEntradaVazia()
           }
           else
           {
@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
              }
              else
              {
-                 Toast.makeText(this, "Não foi possível fazer o login, por favor verifique os dados informados.", Toast.LENGTH_SHORT).show()
+                 criarToastCustomizadoLoginInvalido()
              }
           }
         }
@@ -114,5 +114,25 @@ class MainActivity : AppCompatActivity() {
     {
         campoLogin.text.clear()
         campoSenha.text.clear()
+    }
+
+    fun criarToastCustomizadoEntradaVazia ()
+    {
+        val view = layoutInflater.inflate(R.layout.activity_custom_toast_entradas_vazias,null)
+
+        val toast = Toast(this)
+        toast.view = view
+        toast.duration = Toast.LENGTH_SHORT
+        toast.show()
+    }
+
+    fun criarToastCustomizadoLoginInvalido ()
+    {
+        val view = layoutInflater.inflate(R.layout.activity_custom_toast_login_invalido,null)
+
+        val toast = Toast(this)
+        toast.view = view
+        toast.duration = Toast.LENGTH_SHORT
+        toast.show()
     }
 }

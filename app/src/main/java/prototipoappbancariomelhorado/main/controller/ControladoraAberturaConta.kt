@@ -21,7 +21,6 @@ class ControladoraAberturaConta : AppCompatActivity() {
 
     lateinit var botaoAbrirConta : Button;
     lateinit var botaoVoltar : TextView;
-    lateinit var botaoRegistros : Button;
     lateinit var campoNome : EditText;
     lateinit var campoDataNascimento : EditText;
     lateinit var campoLogin : EditText;
@@ -46,23 +45,12 @@ class ControladoraAberturaConta : AppCompatActivity() {
         }
 
 
-        botaoRegistros.setOnClickListener()
-        {
-
-            var registros = contaDAO.pegarContasComoTexto(usuarioDAO.pegarDadosUsuarios())
-
-            var intent = Intent(this, ControladoraVisualizacaoRegistros::class.java);
-            intent.putExtra("registros", registros)
-            startActivity(intent);
-        }
-
-
         botaoAbrirConta.setOnClickListener()
         {
           if(verificaEntradasVazias(campoNome.text.toString(), campoDataNascimento.text.toString(),
               campoLogin.text.toString(), campoSenha.text.toString()))
           {
-              Toast.makeText(this, "Por favor, preencha todos os campos.", Toast.LENGTH_SHORT).show()
+              criarToastCustomizadoEntradaVazia()
           }
           else
           {
@@ -70,7 +58,7 @@ class ControladoraAberturaConta : AppCompatActivity() {
 
               if(verificaLoginInformado(campoLogin.text.toString(), usuarioDAO))
               {
-                  Toast.makeText(this, "O Login Informado já foi cadastrado!", Toast.LENGTH_SHORT).show()
+                  caixaDeDialogoUsuarioEmUso()
               }
               else
               {
@@ -116,7 +104,6 @@ class ControladoraAberturaConta : AppCompatActivity() {
         campoSenha = findViewById(R.id.editSenha)
         botaoVoltar = findViewById(R.id.botaoVoltar)
         botaoAbrirConta = findViewById(R.id.botaoDeAbrirConta)
-        botaoRegistros = findViewById(R.id.botaoDeRegisto)
 
     }
 
@@ -199,6 +186,29 @@ class ControladoraAberturaConta : AppCompatActivity() {
         dialog = build.create()
         dialog.show()
 
+    }
+
+    fun caixaDeDialogoUsuarioEmUso() {
+        val build = AlertDialog.Builder(this)
+        val view = layoutInflater.inflate(R.layout.activity_caixa_dialogo_login_em_uso, null)
+
+        build.setView(view);
+
+        var botaoErro = view.findViewById<Button>(R.id.botaoUsuarioExistente);
+        botaoErro.setOnClickListener { dialog.dismiss() }
+        dialog = build.create()
+        dialog.show()
+
+    }
+
+    fun criarToastCustomizadoEntradaVazia ()
+    {
+        val view = layoutInflater.inflate(R.layout.activity_custom_toast_entradas_vazias,null)
+
+        val toast = Toast(this)
+        toast.view = view
+        toast.duration = Toast.LENGTH_SHORT
+        toast.show()
     }
 
 }

@@ -49,8 +49,6 @@ class ControladoraTransferencia : AppCompatActivity() {
 
         var itemSelecionado : SelecaoConta? = null
 
-        Log.i("Erro", "A LISTA E: $listaDeContas")
-
         var indiceSelecaoConta = buscaContaDaSelecao(conta, listaDeContas)
 
         listaDeContas.removeAt(indiceSelecaoConta)
@@ -62,8 +60,6 @@ class ControladoraTransferencia : AppCompatActivity() {
         menuSelecao.onItemClickListener = AdapterView.OnItemClickListener { parent, view, position, id ->
 
             itemSelecionado = listaDeContas[position]
-
-            Log.i("Erro", "A CONTA E: $itemSelecionado")
 
         }
 
@@ -77,7 +73,7 @@ class ControladoraTransferencia : AppCompatActivity() {
         {
             if(verificaEntradasVazias())
             {
-                Toast.makeText(this, "Por favor, selecione e preencha  todos os campos.", Toast.LENGTH_SHORT).show()
+                criarToastCustomizadoEntradaESelecaoVazia()
             }
             else
             {
@@ -261,5 +257,15 @@ class ControladoraTransferencia : AppCompatActivity() {
         dialog = build.create()
         dialog.show()
 
+    }
+
+    fun criarToastCustomizadoEntradaESelecaoVazia ()
+    {
+        val view = layoutInflater.inflate(R.layout.activity_custom_toast_entradas_e_selecoes_vazias,null)
+
+        val toast = Toast(this)
+        toast.view = view
+        toast.duration = Toast.LENGTH_SHORT
+        toast.show()
     }
 }

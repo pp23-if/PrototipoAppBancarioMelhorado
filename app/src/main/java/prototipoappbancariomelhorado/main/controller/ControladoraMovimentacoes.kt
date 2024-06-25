@@ -24,7 +24,7 @@ import java.time.format.DateTimeFormatter
 
 class ControladoraMovimentacoes : AppCompatActivity() {
 
-     lateinit var botaoVoltar : TextView
+    lateinit var botaoVoltar: TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lista_movimentacoes)
@@ -42,16 +42,20 @@ class ControladoraMovimentacoes : AppCompatActivity() {
 
         var listaDeMovimentacoes = movimentacaoDAO.pegarMovimentacoesConta(conta)
 
-        val recyclerViewMovimentacoes = findViewById<RecyclerView>(R.id.reciclerMovimentacoes)
+        if (listaDeMovimentacoes.isNotEmpty()) {
+            val recyclerViewMovimentacoes = findViewById<RecyclerView>(R.id.reciclerMovimentacoes)
 
-        recyclerViewMovimentacoes.layoutManager = LinearLayoutManager(this)
+            recyclerViewMovimentacoes.layoutManager = LinearLayoutManager(this)
 
-        val adapter = MovimentacoesAdapter(listaDeMovimentacoes)
+            val adapter = MovimentacoesAdapter(listaDeMovimentacoes)
 
-        recyclerViewMovimentacoes.adapter = adapter
+            recyclerViewMovimentacoes.adapter = adapter
+
+        } else {
+            criarToastCustomizadoListaMovimentacaoVazia()
+        }
 
     }
-
 
 
     private fun pegaContaDaActivityAnterior(bundle: Bundle?): Conta? {
@@ -62,6 +66,15 @@ class ControladoraMovimentacoes : AppCompatActivity() {
                 getParcelable("conta")
             }
         }
+    }
+
+    fun criarToastCustomizadoListaMovimentacaoVazia() {
+        val view = layoutInflater.inflate(R.layout.activity_custom_toast_movimentacoes_vazias, null)
+
+        val toast = Toast(this)
+        toast.view = view
+        toast.duration = Toast.LENGTH_SHORT
+        toast.show()
     }
 
 }

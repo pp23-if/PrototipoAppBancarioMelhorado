@@ -31,8 +31,6 @@ class ControladoraDeposito : AppCompatActivity() {
 
         var conta = pegaContaDaActivityAnterior(intent.extras) as Conta
 
-        Log.i("Erro", "A CONTA E: $conta")
-
         botaoVoltar.setOnClickListener()
         {
             this.finish()
@@ -42,7 +40,7 @@ class ControladoraDeposito : AppCompatActivity() {
         {
             if(verificaEntradasVazias())
             {
-                Toast.makeText(this, "Por favor, preencha todos os campos.", Toast.LENGTH_SHORT).show()
+                criarToastCustomizadoEntradaVazia()
             }
             else
             {
@@ -159,5 +157,15 @@ class ControladoraDeposito : AppCompatActivity() {
         dialog = build.create()
         dialog.show()
 
+    }
+
+    fun criarToastCustomizadoEntradaVazia ()
+    {
+        val view = layoutInflater.inflate(R.layout.activity_custom_toast_entradas_vazias,null)
+
+        val toast = Toast(this)
+        toast.view = view
+        toast.duration = Toast.LENGTH_SHORT
+        toast.show()
     }
 }

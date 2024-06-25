@@ -55,8 +55,7 @@ class ControladoraAtualizacaoUsuario : AppCompatActivity() {
                     campoLogin.text.toString(), campoSenha.text.toString()
                 )
             ) {
-                Toast.makeText(this, "Por favor, preencha todos os campos.", Toast.LENGTH_SHORT)
-                    .show()
+                 criarToastCustomizadoEntradaVazia()
             } else {
                 //verificar se o login ja se encontra cadastrado.
 
@@ -149,7 +148,6 @@ class ControladoraAtualizacaoUsuario : AppCompatActivity() {
         var loginEncontrado =
             usuarioDAO.verificaExistenciaLoginInformadoAtualizacao(login, conta).trim()
 
-        Log.i("Erro", "O LOGIN E: $loginEncontrado")
 
         return loginEncontrado.lowercase() == loginRecebido || loginEncontrado.uppercase() == loginRecebido
     }
@@ -226,6 +224,16 @@ class ControladoraAtualizacaoUsuario : AppCompatActivity() {
         dialog = build.create()
         dialog.show()
 
+    }
+
+    fun criarToastCustomizadoEntradaVazia ()
+    {
+        val view = layoutInflater.inflate(R.layout.activity_custom_toast_entradas_vazias,null)
+
+        val toast = Toast(this)
+        toast.view = view
+        toast.duration = Toast.LENGTH_SHORT
+        toast.show()
     }
 
 }
