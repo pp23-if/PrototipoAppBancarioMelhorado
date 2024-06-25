@@ -64,13 +64,29 @@ class Transferencia (private var idTransferencia : Int, private var contaEntrada
 
         val formatadorDataHora = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")
 
-        return  "ID Transferência: " + this.idTransferencia + "\n" +
-                "Conta De Origem: " + this.contaEntrada.getIdContaAtributo() + "\n" +
-                "Titular: " + this.contaEntrada.getUsuarioAtributo().getNomeUsuarioAtributo() + "\n" +
-                "Conta De Destino: " + this.contaSaida.getIdContaAtributo() +"\n" +
-                "Titular: " + this.contaSaida.getUsuarioAtributo().getNomeUsuarioAtributo() + "\n" +
-                "Tipo De Transferência: " + this.tipoTransferencia +"\n" +
-                "Valor Transferência: " + this.valorTransferencia +"\n" +
-                "Data Movimentação: " + (this.dataTransferencia!!.format(formatadorDataHora))
+        if(this.tipoTransferencia == "feito")
+        {
+            return  "ID Transferência: " + this.idTransferencia + "\n" +
+                    "Conta De Origem: " + this.contaEntrada.getIdContaAtributo() + "\n" +
+                    "Titular: " + this.contaEntrada.getUsuarioAtributo().getNomeUsuarioAtributo() + "\n" +
+                    "Conta De Destino: " + this.contaSaida.getIdContaAtributo() +"\n" +
+                    "Titular: " + this.contaSaida.getUsuarioAtributo().getNomeUsuarioAtributo() + "\n" +
+                    "Tipo De Transferência: " + this.tipoTransferencia +"\n" +
+                    "Valor Transferência: " + this.valorTransferencia +"\n" +
+                    "Data Transferência: " + (this.dataTransferencia!!.format(formatadorDataHora))
+        }
+
+        else
+        {
+            return  "ID Transferência: " + this.idTransferencia + "\n" +
+                    "Conta De Origem: " + this.contaSaida.getIdContaAtributo() +"\n" +
+                    "Titular: " + this.contaSaida.getUsuarioAtributo().getNomeUsuarioAtributo() + "\n" +
+                    "Conta De Destino: " + this.contaEntrada.getIdContaAtributo() + "\n" +
+                    "Titular: " + this.contaEntrada.getUsuarioAtributo().getNomeUsuarioAtributo() + "\n" +
+                    "Tipo De Transferência: " + this.tipoTransferencia +"\n" +
+                    "Valor Transferência: " + this.valorTransferencia +"\n" +
+                    "Data Transferência: " + (this.dataTransferencia!!.format(formatadorDataHora))
+        }
+
     }
 }

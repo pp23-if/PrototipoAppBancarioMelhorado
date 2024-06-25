@@ -88,6 +88,9 @@ class ControladoraUsuarioLogado : AppCompatActivity(), OnOperacaoClickListener {
 
             R.drawable.transferencias -> {
 
+                var intent = Intent(this, ControladoraVisualizacaoTransferencias::class.java);
+                intent.putExtra("conta", conta)
+                startActivity(intent);
 
             }
 

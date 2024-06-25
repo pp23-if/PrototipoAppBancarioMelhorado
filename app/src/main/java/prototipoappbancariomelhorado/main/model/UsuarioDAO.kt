@@ -135,6 +135,34 @@ class UsuarioDAO (context: Context) {
         return usuario
     }
 
+    fun pegarDadosUsuarioPorValorID (idUsuario: Int): Usuario? {
+
+        val recuperarDadosUsuario = bancoDeDados.readableDatabase
+        val cursorUsuario = recuperarDadosUsuario.rawQuery("SELECT * FROM Usuario WHERE idUsuario = ?", arrayOf(idUsuario.toString()))
+
+        val dataFormatada: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+
+        var usuario : Usuario? = null
+
+        with(cursorUsuario) {
+            while (moveToNext()) {
+                val idUsuario = getInt(getColumnIndexOrThrow("idUsuario"))
+                val nome = getString(getColumnIndexOrThrow("nome"))
+                val dataNascimentoStr = getString(getColumnIndexOrThrow("dataNascimento"))
+                val login = getString(getColumnIndexOrThrow("login"))
+                val senha = getString(getColumnIndexOrThrow("senha"))
+
+                val dataNascimentoFormatada = LocalDate.parse(dataNascimentoStr, dataFormatada)
+
+                usuario = Usuario(idUsuario, nome, dataNascimentoFormatada, login, senha)
+
+            }
+        }
+        cursorUsuario.close()
+
+        return usuario
+    }
+
 
     fun atualizarDadosUsuario(usuario: Usuario, usuarioAtualizado: Usuario) : Boolean
     {

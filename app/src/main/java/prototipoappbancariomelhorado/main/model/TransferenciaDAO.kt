@@ -3,6 +3,9 @@ package prototipoappbancariomelhorado.main.model
 import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.LinkedList
 import java.util.Locale
 
 class TransferenciaDAO (context: Context) {
@@ -95,6 +98,56 @@ class TransferenciaDAO (context: Context) {
             db.endTransaction()
             db.close()
         }
+    }
+
+    fun pegarTransferenciasConta(conta: Conta, contaDAO: ContaDAO, usuarioDAO: UsuarioDAO): LinkedList<Transferencia> {
+
+        val listaDeTransferencia = LinkedList<Transferencia>()
+
+        val recuperarDadosTransferencia = bancoDeDados.readableDatabase
+        val cursorTransferencia = recuperarDadosTransferencia.rawQuery("SELECT * FROM Transferencia WHERE fkContaEntrada = ? or fkContaSaida = ?",
+            arrayOf(conta.getIdContaAtributo().toString()))
+
+        val dataFormatada: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+
+        with(cursorTransferencia) {
+            while (moveToNext()) {
+
+                val idTransferencia = getInt(getColumnIndexOrThrow("idTransferencia"))
+                val fkContaEntrada = getInt(getColumnIndexOrThrow("fkContaEntrada"))
+                val fkContaSaida = getInt(getColumnIndexOrThrow("fkContaSaida"))
+                val tipoTransferencia = getString(getColumnIndexOrThrow("tipoTransferencia"))
+                val valorTransferencia = getDouble(getColumnIndexOrThrow("valorTransferencia"))
+                val dataTransferencia = getString(getColumnIndexOrThrow("dataTransferencia"))
+
+                var dataAposTratamento  = dataTransferencia.substring(0, 19).replace("T", " ");
+                val dataTransferenciaFormatada = LocalDateTime.parse(dataAposTratamento, dataFormatada)
+
+                var transferencia : Transferencia
+                
+                if(fkContaEntrada == conta.getIdContaAtributo())
+                {
+                   var conta2 = contaDAO.pegarContaUsuarioPorId(fkContaSaida, usuarioDAO)
+
+                   transferencia = Transferencia(idTransferencia, conta, conta2!!, tipoTransferencia, valorTransferencia, dataTransferenciaFormatada)
+
+                   listaDeTransferencia.add(transferencia)
+                }
+
+                if(fkContaSaida == conta.getIdContaAtributo())
+                {
+                    var conta2 = contaDAO.pegarContaUsuarioPorId(fkContaEntrada, usuarioDAO)
+
+                    transferencia = Transferencia(idTransferencia, conta2!!, conta, tipoTransferencia, valorTransferencia, dataTransferenciaFormatada)
+
+                    listaDeTransferencia.add(transferencia)
+                }
+
+            }
+        }
+        cursorTransferencia.close()
+
+        return listaDeTransferencia
     }
 
 }

@@ -31,6 +31,7 @@
         <activity android:name="prototipoappbancariomelhorado.main.controller.ControladoraPerfil" />
         <activity android:name="prototipoappbancariomelhorado.main.controller.ControladoraAtualizacaoUsuario" />
         <activity android:name="prototipoappbancariomelhorado.main.controller.ControladoraMovimentacoes" />
+        <activity android:name="prototipoappbancariomelhorado.main.controller.ControladoraVisualizacaoTransferencias" />
     </application>
 
 </manifest>

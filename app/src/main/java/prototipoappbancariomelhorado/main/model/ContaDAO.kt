@@ -189,4 +189,34 @@ class ContaDAO(context: Context) {
         return listaDeSelecaoContas;
     }
 
+    fun pegarContaUsuarioPorId(idConta : Int, usuarioDAO: UsuarioDAO): Conta? {
+
+        var recuperarDadosContas = bancoDeDados.readableDatabase
+        val consulta = "SELECT * FROM Conta WHERE idConta = ?"
+
+        val argumentos = arrayOf(idConta.toString())
+
+        var conta: Conta? = null
+
+        var cursorContas = recuperarDadosContas.rawQuery(consulta, argumentos);
+
+        with(cursorContas) {
+            while (moveToNext()) {
+
+                var idConta = getInt(getColumnIndexOrThrow("idConta"))
+                var fkUsuario = getInt(getColumnIndexOrThrow("fkUsuario"))
+                var saldo = getDouble(getColumnIndexOrThrow("saldo"))
+
+                var usuario = usuarioDAO.pegarDadosUsuarioPorValorID(fkUsuario)
+
+
+                conta = Conta(idConta, usuario!!, saldo)
+
+            }
+        }
+        cursorContas.close()
+
+        return conta;
+    }
+
 }

@@ -60,4 +60,5 @@
     <string name="erroDataAtualizacao">Não foi possível atualizar sua data de nascimento, por favor verifique a data informada.</string>
     <string name="movimentacoes">Minhas movimentações</string>
     <string name="cone_de_refer_ncia">Ícone de referência</string>
+    <string name="transferencias">Minhas transferências</string>
 </resources>
